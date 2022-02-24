@@ -1,0 +1,30 @@
+# Project: EventLog
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = EventLog.o
+LINKOBJ  = EventLog.o
+LIBS     = -L"C:/MinGW/lib" -L"C:/MinGW/mingw32/lib" -static-libstdc++ -static-libgcc
+INCS     = -I"C:/MinGW/include" -I"C:/MinGW/lib/gcc/mingw32/9.2.0/include" -I"C:/Program Files/Java/jdk1.8.0_291/include" -I"C:/Program Files/Java/jdk1.8.0_291/include/win32"
+CXXINCS  = -I"C:/MinGW/include" -I"C:/MinGW/lib/gcc/mingw32/9.2.0/include" -I"C:/MinGW/lib/gcc/mingw32/9.2.0/include/c++" -I"C:/Program Files/Java/jdk1.8.0_291/include" -I"C:/Program Files/Java/jdk1.8.0_291/include/win32"
+BIN      = EventLog.dll
+CXXFLAGS = $(CXXINCS) -DBUILDING_DLL=1
+CFLAGS   = $(INCS) -DBUILDING_DLL=1
+RM       = rm.exe -f
+DEF      = libEventLog.def
+STATIC   = libEventLog.a
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN) $(DEF) $(STATIC)
+
+$(BIN): $(LINKOBJ)
+	$(CPP) -shared $(LINKOBJ) -o $(BIN) $(LIBS) -Wl,--output-def,$(DEF),--out-implib,$(STATIC),--add-stdcall-alias
+
+EventLog.o: EventLog.cpp
+	$(CPP) -c EventLog.cpp -o EventLog.o $(CXXFLAGS)

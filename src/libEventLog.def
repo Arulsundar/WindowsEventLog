@@ -1,0 +1,3 @@
+EXPORTS
+    Java_EventLog_takeLogs = Java_EventLog_takeLogs@8 @1
+    Java_EventLog_takeLogs@8 @2
